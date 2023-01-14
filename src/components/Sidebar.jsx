@@ -3,9 +3,7 @@ import { Stack } from '@mui/system';
 import { categories } from '../utils/constants';
 import { Button } from '@mui/material';
 
-const selectedCategory = 'New';
-
-const Sidebar = () => {
+const Sidebar = ({selectedCategory, setSelectedCategory}) => {
   return (
     <Stack
         direction = 'row' //
@@ -15,12 +13,13 @@ const Sidebar = () => {
     >
         {categories.map((category) => (
             <Button
+                onClick={() => {setSelectedCategory(category.name)}}
                 className="category-btn"
                 sx={{ borderRadius:20,
                     color: 'white',
-                    background: category.name === selectedCategory &&'#fc1503',
+                    background: category.name === selectedCategory && '#fc1503',
                     justifyContent: 'flex-start',
-                    pl: 2}}
+                    pl: 2, mb: 1}}
                 key={category.name}
             >
                 <span style = {{ color: category.name === selectedCategory ? 'white': 'red', 
