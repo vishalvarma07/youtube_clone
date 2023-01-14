@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { Stack, Box } from '@mui/system';
 
 const Videos = ({videos}) => {
   console.log(videos)
   return (
-    <div>Videos</div>
+    <Stack direction="row" flexWrap="wrap" justify-content="start" gap={2}>
+
+    </Stack>
   )
 }
 

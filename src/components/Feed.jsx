@@ -11,9 +11,9 @@ const Feed = () => {
 
   useEffect(() => {
     const fetch = async()=>{
-      const data = await fetchFromAPI(`${selectedCategory}`)
-      //console.log(data)
-      setVideos(data);
+      // const data = await fetchFromAPI(`${selectedCategory}`)
+      // //console.log(data)
+      // setVideos(data);
     }
     fetch()
     .catch((err) => {
