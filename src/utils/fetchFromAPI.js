@@ -17,6 +17,7 @@ const options = {
 };
 
 export const fetchFromAPI = async (q) => {
+  options.params.q = q;
   const response = await axios.request(options);
   return response.data;
 }

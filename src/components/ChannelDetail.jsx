@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ChannelDetail = () => {
+const ChannelDetail = ({channelDetail}) => {
   return (
     <div>ChannelDetail</div>
   )

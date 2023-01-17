@@ -10,10 +10,14 @@ const Feed = () => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
+    let ignore = false;
     const fetch = async()=>{
-      // const data = await fetchFromAPI(`${selectedCategory}`)
-      // //console.log(data)
-      // setVideos(data);
+      if(!ignore){
+        const data = await fetchFromAPI(`${selectedCategory}`)
+        //console.log(data)
+        setVideos(data.items);
+        ignore = true;
+      }
     }
     fetch()
     .catch((err) => {
@@ -42,7 +46,7 @@ const Feed = () => {
         <Typography variant ='h4' fontWeight="bold" mb={2} color='white'>
           {selectedCategory} <span style={{color:'red'}}>Videos</span>
         </Typography>
-        <Videos videos={videos}/>
+        {(videos.length !== 0) && <Videos videos={videos}/>}
       </Box>
     </Stack>
   )
