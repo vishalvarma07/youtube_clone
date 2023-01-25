@@ -13,7 +13,7 @@ const Feed = () => {
     let ignore = false;
     const fetch = async()=>{
       if(!ignore){
-        const data = await fetchFromAPI(`${selectedCategory}`)
+        const data = await fetchFromAPI(`${selectedCategory}`,'search')
         //console.log(data)
         setVideos(data.items);
         ignore = true;
@@ -35,11 +35,11 @@ const Feed = () => {
         px: { sx: 0, md:2 }  
         }}>
           <Sidebar selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
-          <Typography className = 'copyright'
+          {/* <Typography className = 'copyright'
             variant='body2'
             sx= {{ mt:1.5, color: '#fff' }}>
             Copyright Vishal Varma 2022
-          </Typography>
+          </Typography> */}
       </Box>
 
       <Box sx={{p:2, overflowY: 'auto', height:'90vh', flex: 2}}>

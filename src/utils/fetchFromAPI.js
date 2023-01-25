@@ -2,7 +2,7 @@ const axios = require("axios");
 
 const options = {
   method: 'GET',
-  url: 'https://youtube-v31.p.rapidapi.com/search',
+  //url: 'https://youtube-v31.p.rapidapi.com/search',
   params: {
     q: 'music',
     part: 'snippet,id',
@@ -16,8 +16,9 @@ const options = {
   }
 };
 
-export const fetchFromAPI = async (q) => {
+export const fetchFromAPI = async (q, type) => {
   options.params.q = q;
+  options.url = `https://youtube-v31.p.rapidapi.com/${type}`;
   const response = await axios.request(options);
   return response.data;
 }
