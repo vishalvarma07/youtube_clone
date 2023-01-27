@@ -10,11 +10,12 @@ const Feed = () => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
+    setVideos([]);
     let ignore = false;
     const fetch = async()=>{
       if(!ignore){
-        const data = await fetchFromAPI(`${selectedCategory}`,'search')
-        //console.log(data)
+        const data = await fetchFromAPI(`${selectedCategory}`,'search','');
+        console.log(data)
         setVideos(data.items);
         ignore = true;
       }

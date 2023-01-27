@@ -4,7 +4,6 @@ const options = {
   method: 'GET',
   //url: 'https://youtube-v31.p.rapidapi.com/search',
   params: {
-    q: 'music',
     part: 'snippet,id',
     regionCode: 'US',
     maxResults: '50',
@@ -16,11 +15,21 @@ const options = {
   }
 };
 
-export const fetchFromAPI = async (q, type) => {
-  options.params.q = q;
+export const fetchFromAPI = async (q = "music", type, id) => {
   options.url = `https://youtube-v31.p.rapidapi.com/${type}`;
-  const response = await axios.request(options);
-  return response.data;
+  if (type === 'search'){
+    options.params.q = q;
+    options.params.part = 'id,snippet';
+    const response = await axios.request(options);
+    return response.data;
+  }
+  if (type === 'channels'){
+    options.params.id = id;
+    options.params.part = 'snippet,statistics';
+    const response = await axios.request(options);
+    console.log(response);
+    return response.data;
+  }
 }
 
 // export const fetchFromAPI = async(url) => {

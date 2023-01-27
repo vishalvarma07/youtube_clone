@@ -11,13 +11,13 @@ const ChannelDetail = () => {
 
   const {id} = useParams();
 
-  console.log(channelDetail);
-
   useEffect(() => {
     let ignore = false;
     const fetch = async() =>{
+      console.log(id);
       if(!ignore){
-        const data = fetchFromAPI(`channels?part="snippet&id=${id}`)
+        const data = await fetchFromAPI('','channels',id);
+        console.log(data);
         setChannelDetail(data?.items[0]);
         ignore = true;
       }
