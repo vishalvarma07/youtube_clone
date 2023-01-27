@@ -8,6 +8,7 @@ import { fetchFromAPI } from '../utils/fetchFromAPI';
 
 const ChannelDetail = () => {
   const [channelDetail, setChannelDetail] = useState(null);
+  const [videos, setVideos] = useState(null);
 
   const {id} = useParams();
 
@@ -16,9 +17,12 @@ const ChannelDetail = () => {
     const fetch = async() =>{
       console.log(id);
       if(!ignore){
-        const data = await fetchFromAPI('','channels',id);
+        const data = await fetchFromAPI('channelDetail','','channels',id);
         console.log(data);
         setChannelDetail(data?.items[0]);
+        const videoData = await fetchFromAPI('channelVideos','','search',id);
+        setVideos(videoData?.items);
+        console.log(videoData);
         ignore = true;
       }
     }
@@ -28,7 +32,13 @@ const ChannelDetail = () => {
     })
   },[id])
   return (
-    <div>ChannelDetail</div>
+    <Box minHeight="95vh">
+      <Box>
+        <div
+          
+        />
+      </Box>
+    </Box>
   )
 }
 

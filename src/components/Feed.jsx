@@ -14,7 +14,7 @@ const Feed = () => {
     let ignore = false;
     const fetch = async()=>{
       if(!ignore){
-        const data = await fetchFromAPI(`${selectedCategory}`,'search','');
+        const data = await fetchFromAPI('feed',`${selectedCategory}`,'search','');
         console.log(data)
         setVideos(data.items);
         ignore = true;

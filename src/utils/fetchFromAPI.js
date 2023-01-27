@@ -15,21 +15,22 @@ const options = {
   }
 };
 
-export const fetchFromAPI = async (q = "music", type, id) => {
+export const fetchFromAPI = async (key, q = "music", type, id) => {
   options.url = `https://youtube-v31.p.rapidapi.com/${type}`;
-  if (type === 'search'){
+  if (key === 'feed'){
     options.params.q = q;
     options.params.part = 'id,snippet';
-    const response = await axios.request(options);
-    return response.data;
   }
-  if (type === 'channels'){
+  if (key === 'channelDetail'){
     options.params.id = id;
     options.params.part = 'snippet,statistics';
-    const response = await axios.request(options);
-    console.log(response);
-    return response.data;
   }
+  if (key === 'channelVideos'){
+    options.params.channelId = id;
+    options.params.part = 'snippet';
+  }
+  const response = await axios.request(options);
+  return response.data;
 }
 
 // export const fetchFromAPI = async(url) => {
