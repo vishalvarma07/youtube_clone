@@ -19,6 +19,7 @@ export const fetchFromAPI = async (key, q = "music", type, id) => {
   options.url = `https://youtube-v31.p.rapidapi.com/${type}`;
   if (key === 'feed'){
     options.params.q = q;
+    options.regionCode = 'US';
     options.params.part = 'id,snippet';
   }
   if (key === 'channelDetail'){
@@ -28,6 +29,14 @@ export const fetchFromAPI = async (key, q = "music", type, id) => {
   if (key === 'channelVideos'){
     options.params.channelId = id;
     options.params.part = 'snippet';
+  }
+  if (key === 'videos'){
+    options.params.id = id;
+    options.params.part = 'snippet,id,statistics';
+  }
+  if (key === 'related'){
+    options.params.relatedToVideoId = id;
+    options.params.part = 'snippet,id';
   }
   const response = await axios.request(options);
   return response.data;

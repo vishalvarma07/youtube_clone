@@ -1,56 +1,39 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { Box, Stack, Typography } from '@mui/material';
-import { Sidebar, Videos } from './';
-import { fetchFromAPI } from '../utils/fetchFromAPI';
+import React, { useEffect, useState } from "react";
+import { Box, Stack, Typography } from "@mui/material";
+
+import { fetchFromAPI } from "../utils/fetchFromAPI";
+import { Videos, Sidebar } from "./";
 
 const Feed = () => {
-
-  const [selectedCategory, setSelectedCategory] = useState('New');
+  const [selectedCategory, setSelectedCategory] = useState("New");
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
     setVideos([]);
-    let ignore = false;
-    const fetch = async()=>{
-      if(!ignore){
-        const data = await fetchFromAPI('feed',`${selectedCategory}`,'search','');
-        console.log(data)
-        setVideos(data.items);
-        ignore = true;
-      }
-    }
-    fetch()
-    .catch((err) => {
-      console.log(err)
-    })
-  }, [selectedCategory]);
+
+    fetchFromAPI('feed',`${selectedCategory}`,'search','')
+      .then((data) => setVideos(data.items))
+    }, [selectedCategory]);
 
   return (
-    <Stack
-      sx = {{flexDirection : { sx: 'column', md: "row" }}} //md- medium devices and above, sx- other cases
-    >
-      <Box sx = {{
-        height: {sx : 'auto', md:'92vh'}, 
-        borderRight: '1px solid #3d3d3d',
-        px: { sx: 0, md:2 }  
-        }}>
-          <Sidebar selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}/>
-          {/* <Typography className = 'copyright'
-            variant='body2'
-            sx= {{ mt:1.5, color: '#fff' }}>
-            Copyright Vishal Varma 2022
-          </Typography> */}
+    <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
+      <Box sx={{ height: { sx: "auto", md: "92vh" }, borderRight: "1px solid #3d3d3d", px: { sx: 0, md: 2 } }}>
+        <Sidebar selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+        
+        <Typography className="copyright" variant="body2" sx={{ mt: 1.5, color: "#fff", }}>
+          Copyright © 2022 Vishal
+        </Typography>
       </Box>
 
-      <Box sx={{p:2, overflowY: 'auto', height:'90vh', flex: 2}}>
-        <Typography variant ='h4' fontWeight="bold" mb={2} color='white'>
-          {selectedCategory} <span style={{color:'red'}}>Videos</span>
+      <Box p={2} sx={{ overflowY: "auto", height: "90vh", flex: 2 }}>
+        <Typography variant="h4" fontWeight="bold" mb={2} sx={{ color: "white" }}>
+          {selectedCategory} <span style={{ color: "#FC1503" }}>videos</span>
         </Typography>
-        {(videos.length !== 0) && <Videos videos={videos}/>}
+
+        <Videos videos={videos} />
       </Box>
     </Stack>
-  )
-}
+  );
+};
 
-export default Feed
+export default Feed;
