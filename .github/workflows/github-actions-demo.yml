@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - vishalvarma07-patch-1
+  pull_request:
+    branches:
+      - main
 jobs:
   deployment:
     runs-on: ubuntu-latest
